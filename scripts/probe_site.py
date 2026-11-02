@@ -219,6 +219,9 @@ def main() -> int:
     host = urlparse(url).netloc
     ev = {"target": url, "host": host, "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%S%z")}
 
+    # 站点级文件(robots/sitemap/llms)一律挂在站点根,与输入路径无关
+    origin = f"{urlparse(url).scheme}://{urlparse(url).netloc}"
+
     ev["redirects"] = redirect_chain(host, args.timeout)
 
     home = fetch(url, UA, args.timeout)
@@ -238,14 +241,14 @@ def main() -> int:
     }
     ev["homepage_meta"] = parse_homepage(home["body"], home["final_url"])
 
-    robots = fetch(url + "/robots.txt", UA, args.timeout)
+    robots = fetch(origin + "/robots.txt", UA, args.timeout)
     if robots["ok"]:
         ev["robots"] = {"status": robots["status"], "content_type": robots["content_type"],
                         "body": robots["body"][:4000], **parse_robots(robots["body"])}
     else:
         ev["robots"] = {"status": None, "error": robots["error"]}
 
-    sm_url = (ev.get("robots", {}) or {}).get("sitemap") or (url + "/sitemap.xml")
+    sm_url = (ev.get("robots", {}) or {}).get("sitemap") or (origin + "/sitemap.xml")
     sm = fetch(sm_url, UA, args.timeout)
     if sm["ok"] and "xml" in (sm["content_type"] or "") or (sm["ok"] and "<loc>" in sm["body"]):
         ev["sitemap"] = {"url": sm_url, "status": sm["status"], **parse_sitemap(sm["body"])}
@@ -253,8 +256,8 @@ def main() -> int:
         ev["sitemap"] = {"url": sm_url, "status": sm.get("status"), "error": sm.get("error"),
                          "note": "no sitemap or non-XML response"}
 
-    llms = fetch(url + "/llms.txt", UA, args.timeout)
-    llms_full = fetch(url + "/llms-full.txt", UA, args.timeout)
+    llms = fetch(origin + "/llms.txt", UA, args.timeout)
+    llms_full = fetch(origin + "/llms-full.txt", UA, args.timeout)
     def llms_state(r):
         if not r["ok"]:
             return {"state": "error", "error": r["error"]}
