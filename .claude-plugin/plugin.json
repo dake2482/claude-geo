@@ -1,0 +1,11 @@
+{
+  "name": "claude-geo",
+  "description": "GEO (Generative Engine Optimization) website diagnostics: 7-dimension scoring, evidence ledger, remediation list and 90-day roadmap. Chinese reports.",
+  "version": "0.1.0",
+  "author": {
+    "name": "dake"
+  },
+  "license": "MIT",
+  "keywords": ["geo", "seo", "ai-search", "llms-txt", "audit"],
+  "skills": ["geo", "geo-audit", "geo-page", "geo-llms", "geo-report"]
+}

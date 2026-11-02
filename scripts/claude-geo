@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# claude-geo launcher (pattern follows claude-seo/scripts/claude-seo)
+# Resolves a supported Python, then delegates to runtime.py (sibling file).
+
+launcher_dir="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+runtime="${launcher_dir}/runtime.py"
+
+if [[ ! -f "${runtime}" ]]; then
+    echo "claude-geo runtime is missing. Reinstall claude-geo." >&2
+    exit 2
+fi
+
+min_minor=11
+max_minor=14
+
+probe_version() {
+    local version
+    version="$("$@" -c 'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null)" || return 1
+    printf '%s' "${version%$'\r'}"
+}
+
+in_range() {
+    [[ "$1" =~ ^3\.([0-9]+)$ ]] || return 1
+    (( BASH_REMATCH[1] >= min_minor && BASH_REMATCH[1] <= max_minor ))
+}
+
+if [[ -n "${CLAUDE_GEO_PYTHON:-}" ]]; then
+    found="$(probe_version "${CLAUDE_GEO_PYTHON}" || true)"
+    if in_range "${found}"; then
+        exec "${CLAUDE_GEO_PYTHON}" "${runtime}" "$@"
+    fi
+    echo "CLAUDE_GEO_PYTHON must be Python 3.${min_minor}-3.${max_minor}. Found: ${found:-none}." >&2
+    exit 2
+fi
+
+try_python() {
+    local found
+    command -v "$1" >/dev/null 2>&1 || return 1
+    found="$(probe_version "$@")" || return 1
+    if in_range "${found}"; then
+        exec "$@" "${runtime}" ${script_args[@]+"${script_args[@]}"}
+    fi
+    return 1
+}
+
+script_args=("$@")
+try_python python3 || true
+try_python python || true
+minor=${max_minor}
+while (( minor >= min_minor )); do
+    try_python "python3.${minor}" || true
+    minor=$(( minor - 1 ))
+done
+
+echo "claude-geo needs Python 3.${min_minor}–3.${max_minor}. Install one or set CLAUDE_GEO_PYTHON." >&2
+exit 2

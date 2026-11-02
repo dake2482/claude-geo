@@ -1,0 +1,13 @@
+{
+  "name": "claude-geo-marketplace",
+  "owner": {
+    "name": "dake"
+  },
+  "plugins": [
+    {
+      "name": "claude-geo",
+      "source": "./",
+      "description": "GEO website diagnostics with 7-dimension scoring and Chinese HTML reports."
+    }
+  ]
+}
