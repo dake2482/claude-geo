@@ -28,7 +28,8 @@ COMMON_PATHS = {
     "news_blog": ["/blog", "/news", "/articles", "/updates", "/changelog", "/tin-tuc", "/wiki"],
     "contact": ["/contact", "/contact-us", "/lien-he"],
     "privacy_legal": ["/privacy", "/privacy-policy", "/terms", "/terms-of-service", "/legal",
-                      "/chinh-sach-bao-mat", "/dieu-khoan"],
+                      "/chinh-sach-bao-mat", "/chinh-sach", "/bao-mat", "/dieu-khoan-su-dung",
+                      "/dieu-khoan", "/chinh-sach-thanh-toan-hoan-phi"],
 }
 
 SITEMAP_KEYWORDS = {
