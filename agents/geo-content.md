@@ -31,4 +31,6 @@ tools: Read, Bash, Write, Glob, Grep, WebFetch
 
 ## 输出契约
 
-findings / score / gaps,外加**数字资产地图素材**:已具备资产清单 + 缺失资产(按 GEO 价值排序)
+findings / score / gaps,外加**数字资产地图素材**:
+- 已具备资产:逐项命名(如"6 大信任卖点卡片(点名每张)""4 步合作流程""FAQ ×10(点名分类)""gov.cn 引用 ×5"),不用概述式
+- 缺失资产:按 GEO 价值排序,每项一句话说明建设形态
