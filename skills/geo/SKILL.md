@@ -88,7 +88,8 @@ P1(一票否决级)发现的处理规则(与原报告体系对齐):
 - **软 200 判定用 MD5**:抽 3–5 个编造路径,响应与首页逐字节一致才算实锤,单看状态码不算。
 - **Schema 看字段完整度**:"有 Organization" 不加分;`name/url/description` 只有骨架 vs `logo/sameAs/address/contactPoint/foundingDate` 齐全,是两档分。
 - **llms.txt 不影响 Google Search**(公开事实);价值评估只针对其他 AI 平台,报告中如实表述。
-- **FAQPage schema**:Google 已全面下线 FAQ 富结果;现有 FAQPage 报 Info 级,不建议为富结果新增。
+- **FAQPage 措辞纪律**(与 claude-seo 对齐):Google 富结果 2026-05-07 全面下线;现有 FAQPage 报 Info 级,不建议删除;**可以为已存在的可见 FAQ 补标记(存量),但整改清单与预期影响中不得宣称"提升 AI 引用/抽取概率"——该收益未经证实**,只可表述为"为机器解析提供结构化形态";不得为 SERP 富结果新增 FAQPage;真实用户提交答案的单一问题页用 QAPage。
+- **Schema 弃用清单(永不推荐)**:HowTo(2023-09 弃用)、SpecialAnnouncement、CourseInfo(并入 Course)、LearningVideo(用 VideoObject)、EstimatedSalary;**Review/AggregateRating 不得用于自家 testimonial 区**(self-serving review 违反 Google 政策),家长/客户见证保持可见 HTML 即可。
 - **免责声明必须出现**在报告 01 章节:"本评分基于公开页面实测,不代表搜索引擎或 AI 平台官方评价"。
 - 无法抓取(鉴权拦截/超时)的项目如实标注,禁止经验推测。
 
