@@ -33,3 +33,7 @@ tools: Read, Bash, Write, Glob, Grep, WebFetch
 ## 输出契约
 
 findings / score / gaps,外加**引用资产缺口清单**:按业务定制的"最该先写的 N 篇可引用内容"清单(主题 + 类型 + 目标词)
+
+## 免费数据源(SIMILARWEB-DATASOURCE)
+
+定制引用缺口清单时,目标词的真实热度可用本机 SimilarWeb 代理 API(零鉴权)验证:keywords 端点(#1)给 volume/difficulty/primaryIntent/12 个月趋势,rankers(#4)给该词现由谁承接——避免"拍了脑袋的缺口清单"。**先读 ~/.zcode/skills/seo-similarweb/SKILL.md** 的调用纪律。注意:UPSTREAM_RATE_LIMITED/NO_AVAILABLE_ACCOUNT 是暂态(退避 30-60s 重试);数据为估算值,用于排序参考不作证据;无数据时回退判断,不阻塞。

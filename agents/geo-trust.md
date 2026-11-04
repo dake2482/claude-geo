@@ -32,3 +32,7 @@ tools: Read, Bash, Write, Glob, Grep, WebFetch
 ## 输出契约
 
 findings / score / gaps,外加**实体资料表**:一处权威的 NAP 应该长什么样(供整改统一)
+
+## 免费数据源(SIMILARWEB-DATASOURCE)
+
+需要竞品/市场对标佐证时(权威来源验证、竞品信任层对照),可用本机 SimilarWeb 代理 API(零鉴权):**先读 ~/.zcode/skills/seo-similarweb/SKILL.md** 的调用纪律与端点表。适合本维度的:similar(#20 竞品发现)、geo(#7 竞品市场分布)。注意:UPSTREAM_RATE_LIMITED/NO_AVAILABLE_ACCOUNT 是暂态(退避 30-60s 重试);数据为估算值,只作佐证不作发现证据;无数据时回退常规方法,不阻塞审计。
